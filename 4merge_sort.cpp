@@ -1,46 +1,78 @@
-
 #include <iostream>
 using namespace std;
-void Merge(int A[], int l, int mid, int h)
+void merge_karo(int arr[], int beg, int mid, int end)
 {
-    int i = l, j = mid + 1, k = l;
-    int B[100];
-    while (i <= mid && j <= h)
+    int i, j, k;
+    int beg_s = (mid - beg + 1);
+    int end_s = (end - mid);
+
+    int beg_arr[beg_s];
+    int end_arr[end_s];
+    for (i = 0; i < beg_s; i++)
     {
-        if (A[i] < A[j])
-            B[k++] = A[i++];
-        else
-            B[k++] = A[j++];
+        beg_arr[i] = arr[beg + i];
     }
-    for (; i <= mid; i++)
-        B[k++] = A[i];
-    for (; j <= h; j++)
-        B[k++] = A[j];
-    for (i = l; i <= h; i++)
-        A[i] = B[i];
-}
-void IMergeSort(int A[], int n)
-{
-    int p, l, h, mid, i;
-    for (p = 2; p <= n; p = p * 2)
+    for (j = 0; j < end_s; j++)
     {
-        for (i = 0; i + p - 1 <= n; i = i + p)
+        end_arr[j] = arr[j + 1 + mid];
+    }
+    i = 0;
+    j = 0;
+    k = beg;
+    while (i < beg_s && j < end_s)
+    {
+        if (beg_arr[i] <= end_arr[j])
         {
-            l = i;
-            h = i + p - 1;
-            mid = (l + h) / 2;
-            Merge(A, l, mid, h);
+            arr[k] = beg_arr[i];
+            i++;
         }
+        else
+        {
+            arr[k] = end_arr[j];
+            j++;
+        }
+        k++;
     }
-    if (p / 2 < n)
-        Merge(A, 0, p / 2 - 1, n);
+    while (i < beg_s)
+    {
+        arr[k] = beg_arr[i];
+        i++;
+        k++;
+    }
+    while (j < end_s)
+    {
+        arr[k] = end_arr[j];
+        j++;
+        k++;
+    }
+}
+void merge_sorted(int arr[], int beg, int end)
+{
+    if (beg < end)
+    {
+        int mid = (beg + end) / 2;
+        merge_sorted(arr, beg, mid);
+        merge_sorted(arr, mid + 1, end);
+        merge_karo(arr, beg, mid, end);
+    }
+}
+void print_fnc(int arr[], int n)
+{
+    int i;
+    for (i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
 }
 int main()
 {
-    int A[] = {11, 13, 7, 12, 16, 9, 24, 5, 10, 3}, n = 10, i;
-    IMergeSort(A, n);
-    for (i = 0; i < 10; i++)
-        printf("%d ", A[i]);
-    printf("\n");
+    int arr[] = {11, 30, 24, 7, 31, 16, 39, 41,89,-9,45};
+    int n = sizeof(arr) / sizeof(arr[0]);
+// n=8;
+    print_fnc(arr, n);
+    cout << endl;
+    merge_sorted(arr, 0, n-1);
+    print_fnc(arr, n);
+
     return 0;
 }
