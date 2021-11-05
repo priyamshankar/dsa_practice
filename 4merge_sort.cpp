@@ -68,7 +68,6 @@ int main()
 {
     int arr[] = {11, 30, 24, 7, 31, 16, 39, 41,89,-9,45};
     int n = sizeof(arr) / sizeof(arr[0]);
-// n=8;
     print_fnc(arr, n);
     cout << endl;
     merge_sorted(arr, 0, n-1);

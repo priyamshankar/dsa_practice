@@ -23,7 +23,7 @@ public:
                     count=i;
                 }
             }
-            cout<<count<<"  ";
+            // cout<<count<<"  ";
             for (j = count; j < i +1; j++)
             {
                 temp = arr[i];
