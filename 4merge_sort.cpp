@@ -3,8 +3,8 @@ using namespace std;
 void merge_karo(int arr[], int beg, int mid, int end)
 {
     int i, j, k;
-    int beg_s = (mid - beg + 1);
-    int end_s = (end - mid);
+    int beg_s = (mid - beg + 1);        //beg_s and end_s are the size of the beg arrays and end arays.
+    int end_s = (end - mid);        //same 
 
     int beg_arr[beg_s];
     int end_arr[end_s];
