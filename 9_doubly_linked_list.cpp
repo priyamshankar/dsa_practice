@@ -72,16 +72,16 @@ void delete_node(node *&head)
 void display(node *&head)
 {
     node *temp = head;
-    cout<<endl;
+    cout << endl;
     while (temp->next != NULL)
     {
-        cout<<temp->data<<"->";
-        temp=temp->next;
+        cout << temp->data << "->";
+        temp = temp->next;
     }
-    cout<<endl;
+    cout << endl;
 }
 
-//other things are same almost
+// other things are same almost
 int main()
 {
     node *head = NULL;
